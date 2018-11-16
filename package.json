@@ -1,8 +1,12 @@
 {
   "name": "nativescript-vue-navigator",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A simple router for NativeScript-Vue",
   "main": "index.js",
+  "files": [
+    "index.js",
+    "components"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
