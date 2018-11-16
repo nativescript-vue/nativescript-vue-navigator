@@ -1,0 +1,19 @@
+{
+  "name": "nativescript-vue-navigator",
+  "version": "0.0.1",
+  "description": "A simple router for NativeScript-Vue",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "nativescript",
+    "vue",
+    "nativescript-vue",
+    "router",
+    "navigator",
+    "navigation"
+  ],
+  "author": "Igor Randjelovic",
+  "license": "MIT"
+}
