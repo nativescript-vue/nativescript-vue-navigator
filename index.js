@@ -22,17 +22,13 @@ export default function install(Vue, {routes}) {
     },
     computed: {
       route() {
-        return this._resolveRoute(this.path)
+        return routes[this.path]
       },
     },
     methods: {
-      _resolveRoute(path) {
-        return routes[path]
-      },
-      _resolveComponent(path) {
-        const route = this._resolveRoute(path)
-        if (route) {
-          return route.component
+      _resolveComponent() {
+        if (this.route) {
+          return this.route.component
         }
         return false
       },

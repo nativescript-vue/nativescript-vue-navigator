@@ -44,3 +44,39 @@ export const routes = {
 </template>
 ```
 
+### Attaching extra data to a route
+
+```diff
+// routes.js
+import HomePage from './components/HomePage'
+import LoginPage from './components/LoginPage'
+
+export const routes = {
+  '/home': {
+    component: HomePage,
++   // we are using `meta` as a good practice, but you are free to use something else
++   meta: { needsAuth: true }
+  },
+  '/login': {
+    component: LoginPage,
++   meta: { needsAuth: false }
+  },
+}
+```
+
+```xml
+<!-- anywhere in your templates -->
+<Label :text="$navigator.route.meta.needsAuth" />
+```
+```js
+// or in any vue component
+export default {
+  methods: {
+    doStuff() {
+      if(this.$navigator.route.meta.needsAuth) {
+        // do stuff
+      }
+    }
+  }
+}
+```
