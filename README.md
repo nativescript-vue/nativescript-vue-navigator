@@ -12,13 +12,13 @@ $ npm install --save nativescript-vue-navigator
 // main.js
 import Vue from 'nativescript-vue'
 ...
-+import Navigator from 'nativescript-vue-navigator'
-+import {routes} from './routes'
-+Vue.use(Navigator, { routes })
++ import Navigator from 'nativescript-vue-navigator'
++ import {routes} from './routes'
++ Vue.use(Navigator, { routes })
 
 new Vue({
-  - render: h => h('frame', App),
-  + render: h => h(App),
+-   render: h => h('frame', App),
++   render: h => h(App),
 }).$start()
 ```
 
