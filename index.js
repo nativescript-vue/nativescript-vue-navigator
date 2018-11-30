@@ -18,15 +18,18 @@ export default function install(Vue, {routes}) {
 
   Vue.prototype.$navigator = new Vue({
     data: {
-      path: '',
+      path: false,
+      defaultPath: '/'
     },
     computed: {
       route() {
-        return routes[this.path]
+        return routes[this.path || this.defaultPath]
       },
     },
     methods: {
-      _resolveComponent() {
+      _resolveComponent(defaultPath) {
+        if(defaultPath) this.defaultPath = defaultPath
+
         if (this.route) {
           return this.route.component
         }
@@ -47,6 +50,9 @@ export default function install(Vue, {routes}) {
         }
 
         this.$navigateTo(matchedRoute.component, options)
+      },
+      back(...args) {
+        this.$navigateBack.call(this, args)
       }
     },
   })

@@ -38,7 +38,7 @@ export default {
           _currentEntry = value
           if (value && value.resolvedPage) {
             self.$navigator._updatePath(
-              value.resolvedPage.__path || value.resolvedPage.path || ''
+              value.resolvedPage.__path || self.defaultRoute || ''
             )
           }
         },

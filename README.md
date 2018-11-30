@@ -80,3 +80,19 @@ export default {
   }
 }
 ```
+
+## Navigating
+
+This package provides 2 methods for navigation, `$navigator.navigate` and `$navigator.back`
+
+`$navigator.navigate(to, options)` is used for all forward navigation
+ * `to` is the path to navigate to (ex.: `/home`)
+ * `options` is an optional object, which accepts all options supported  by [Manual Routing](https://nativescript-vue.org/en/docs/routing/manual-routing/#navigateto)
+ 
+For example, given you are on a Login page, and successfully log in you would navigate to the Home page with
+```js
+this.$navigator.navigate('/home', { clearHistory: true })
+```
+Note that we used `clearHistory: true` to prevent the back button from going back to the login page.
+
+`$navigator.back(options, backstackEntry)` is an alias to [`$navigateBack`](https://nativescript-vue.org/en/docs/routing/manual-routing/#navigatebackoptions-backstackentry--null)
