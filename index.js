@@ -44,7 +44,7 @@ export default function install(Vue, {routes}) {
 
         if (!matchedRoute) {
           if (TNS_ENV === 'development') {
-            throw new Error(`Navigating to a route that doesnt exist: ${to}`)
+            throw new Error(`Navigating to a route that doesn\'t exist: ${to}`)
           }
           return false
         }
