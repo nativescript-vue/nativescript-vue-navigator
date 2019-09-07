@@ -10,7 +10,11 @@ export default {
     return h(
       'frame',
       {
-        on: {loaded: this.onFrameLoaded},
+        on: Object.assign(
+          {},
+          this.$listeners,
+          {loaded: this.onFrameLoaded}
+        ),
       },
       [this.slotContent]
     )

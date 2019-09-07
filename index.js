@@ -49,10 +49,10 @@ export default function install(Vue, {routes}) {
           return false
         }
 
-        this.$navigateTo(matchedRoute.component, options)
+        return this.$navigateTo(matchedRoute.component, options)
       },
       back(...args) {
-        this.$navigateBack.call(this, args)
+        return this.$navigateBack.call(this, args)
       }
     },
   })
