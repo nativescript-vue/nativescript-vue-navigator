@@ -19,5 +19,6 @@ jobs:
         npm run semantic-release --if-present
       env:
         CI: true
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
         NPM_TOKEN: ${{secrets.NPM_TOKEN}}
