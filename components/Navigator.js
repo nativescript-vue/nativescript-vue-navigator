@@ -15,6 +15,7 @@ export default {
           this.$listeners,
           {loaded: this.onFrameLoaded}
         ),
+        attrs: this.$attrs,
       },
       [this.slotContent]
     )
