@@ -3,6 +3,11 @@
   "version": "0.0.0-development",
   "description": "A simple router for NativeScript-Vue",
   "main": "index.js",
+  "nativescript": {
+    "plugin": {
+      "vue": "true"
+    },
+  },
   "files": [
     "index.js",
     "components"
