@@ -6,7 +6,7 @@
   "nativescript": {
     "plugin": {
       "vue": "true"
-    },
+    }
   },
   "files": [
     "index.js",
