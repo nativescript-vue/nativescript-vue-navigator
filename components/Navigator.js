@@ -1,5 +1,9 @@
 export default {
   props: {
+    id: {
+      type: String,
+      default: 'navigator'
+    },
     defaultRoute: {
       type: String,
       default: '/',
@@ -15,7 +19,10 @@ export default {
           this.$listeners,
           {loaded: this.onFrameLoaded}
         ),
-        attrs: this.$attrs,
+        attrs: {
+          ...this.$attrs,
+          id: this.$props.id
+        },
       },
       [this.slotContent]
     )
@@ -43,7 +50,8 @@ export default {
           _currentEntry = value
           if (value && value.resolvedPage) {
             self.$navigator._updatePath(
-              value.resolvedPage.__path || self.defaultRoute || ''
+              value.resolvedPage.__path || self.defaultRoute || '',
+              self.$props.id
             )
           }
         },

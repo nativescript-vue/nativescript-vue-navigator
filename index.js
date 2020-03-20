@@ -19,6 +19,7 @@ export default function install(Vue, {routes}) {
   Vue.prototype.$navigator = new Vue({
     data: {
       path: false,
+      paths: {},
       defaultPath: '/'
     },
     computed: {
@@ -35,8 +36,11 @@ export default function install(Vue, {routes}) {
         }
         return false
       },
-      _updatePath(path) {
-        this.path = path
+      _updatePath(path, id = 'navigator') {
+        if(id === 'navigator') {
+          this.path = path
+        }
+        this.$set(this.paths, id, path)
       },
 
       navigate(to, options) {
@@ -49,10 +53,13 @@ export default function install(Vue, {routes}) {
           return false
         }
 
+        options = Object.assign({ frame: 'navigator' }, options)
+
         return this.$navigateTo(matchedRoute.component, options)
       },
-      back(...args) {
-        return this.$navigateBack.call(this, args)
+      back(options, ...args) {
+        options = Object.assign({ frame: 'navigator' }, options)
+        return this.$navigateBack.call(this, options, ...args)
       }
     },
   })

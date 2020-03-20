@@ -81,6 +81,16 @@ export default {
 }
 ```
 
+## Getting the current path
+
+```js
+// logs the current path in the default navigator
+console.log(this.$navigator.path)
+
+// logs the current path in the second navigator (See Multiple Navigators section for more details)
+console.log(this.$navigator.paths.second)
+```
+
 ## Navigating
 
 This package provides 2 methods for navigation, `$navigator.navigate` and `$navigator.back`
@@ -96,3 +106,40 @@ this.$navigator.navigate('/home', { clearHistory: true })
 Note that we used `clearHistory: true` to prevent the back button from going back to the login page.
 
 `$navigator.back(options, backstackEntry)` is an alias to [`$navigateBack`](https://nativescript-vue.org/en/docs/routing/manual-routing/#navigatebackoptions-backstackentry--null)
+
+# Multiple Navigators
+
+It is possible to use multiple `<Navigator>` elements by providing each new Navigator with a unique `id`. 
+
+```vue
+<template>
+  <!-- this is the default navigator and can omit the id -->
+  <Navigator />   
+  <!-- shows the current path of the default navigator -->
+  <Label :text="$navigator.path" />
+
+  <!-- this is the second navigator and it MUST have a unique id -->
+  <Navigator id="second" /> 
+  <!-- shows the current path of the second navigator -->
+  <Label :text="$navigator.paths.second" />
+</template>
+
+<script>
+  export default {
+    methods: {
+      someMethod() {
+        // navigate the default Navigator
+        this.$navigator.navigate('/new-path')
+        // navigate the second default Navigator by specifying the frame option
+        this.$navigator.navigate('/new-path', { frame: 'second' })
+
+
+        // navigate back the default Navigator
+        this.$navigator.back()
+        // navigate back the second Navigator
+        this.$navigator.back({ frame: 'second' })
+      }
+    }    
+  }
+</script>
+```
