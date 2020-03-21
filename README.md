@@ -143,3 +143,24 @@ It is possible to use multiple `<Navigator>` elements by providing each new Navi
   }
 </script>
 ```
+
+# Navigator Modals
+
+```ts
+type ModalOptions = { id: string } & ShowModalOptions
+this.$navigator.modal(path: string, options: ModalOptions);
+```
+
+The default id for modal navigators is `modalNavigator` but can be changed by passing an `id` inside the ModalOptions. 
+
+```js
+// use the default id for the modal
+this.$navigator.modal('/path', { fullscreen: true })
+// to navigate the modal to '/other'
+this.$navigator.navigate('/other', { frame: 'modalNavigator' })
+
+// use a different id for the modal
+this.$navigator.modal('/path', { fullscreen: true, id: 'myModal' })
+// to navigate the myModal modal to '/other'
+this.$navigator.navigate('/other', { frame: 'myModal' })
+```
