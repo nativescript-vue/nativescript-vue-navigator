@@ -1,6 +1,12 @@
 import Navigator from './components/Navigator'
 
 export default function install(Vue, {routes}) {
+  let appRoot;
+  const start = Vue.prototype.$start
+  Vue.prototype.$start = function () {
+    appRoot = this
+    start.call(this)
+  }
   Vue.component('Navigator', Navigator)
 
   Object.keys(routes).map(path => {
@@ -20,24 +26,29 @@ export default function install(Vue, {routes}) {
     data: {
       path: false,
       paths: {},
-      defaultPath: '/'
+      defaultPaths: {},
     },
     computed: {
       route() {
-        return routes[this.path || this.defaultPath]
+        return this.routes('navigator')
+      },
+      routes() {
+        return id => routes[this.paths[id] || this.defaultPaths[id]]
       },
     },
     methods: {
-      _resolveComponent(defaultPath) {
-        if(defaultPath) this.defaultPath = defaultPath
+      _resolveComponent(defaultPath, id) {
+        if (defaultPath) {
+          this.$set(this.defaultPaths, id, defaultPath)
+        }
 
-        if (this.route) {
-          return this.route.component
+        if (this.routes(id)) {
+          return this.routes(id).component
         }
         return false
       },
       _updatePath(path, id = 'navigator') {
-        if(id === 'navigator') {
+        if (id === 'navigator') {
           this.path = path
         }
         this.$set(this.paths, id, path)
@@ -48,17 +59,18 @@ export default function install(Vue, {routes}) {
 
         if (!matchedRoute) {
           if (TNS_ENV === 'development') {
-            throw new Error(`Navigating to a route that does not exist: ${to}`)
+            throw new Error(`[Navigator] Navigating to a route that does not exist: ${to}`)
           }
           return false
         }
 
-        options = Object.assign({ frame: 'navigator' }, options)
+        options = Object.assign({frame: 'navigator'}, options)
 
         return this.$navigateTo(matchedRoute.component, options)
+          .catch(err => console.log(`[Navigator] Failed to navigate: ${err}`))
       },
       back(options, ...args) {
-        options = Object.assign({ frame: 'navigator' }, options)
+        options = Object.assign({frame: 'navigator'}, options)
         return this.$navigateBack.call(this, options, ...args)
       }
     },

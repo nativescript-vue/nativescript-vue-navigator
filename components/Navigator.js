@@ -29,7 +29,8 @@ export default {
   },
   created() {
     this.defaultRouteComponent = this.$navigator._resolveComponent(
-      this.$props.defaultRoute
+      this.$props.defaultRoute,
+      this.$props.id
     )
   },
   methods: {
