@@ -11,6 +11,10 @@ export default function install(Vue, {routes}) {
 
   Object.keys(routes).map(path => {
     routes[path].component.__path = path
+    // this is required to attach the path to vue-class-components. See #31
+    if(routes[path].component.options) {
+      routes[path].component.options.__path = path;
+    }
   })
 
   Vue.mixin({
