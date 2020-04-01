@@ -31,6 +31,6 @@
     "url": "https://github.com/nativescript-vue/nativescript-vue-navigator.git"
   },
   "devDependencies": {
-    "semantic-release": "^15.13.24"
+    "semantic-release": "^17.0.4"
   }
 }
