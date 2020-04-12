@@ -82,7 +82,8 @@ export default function install(Vue, {routes}) {
           render: h => h(Navigator, {
             props: {
               id: options.id || 'navigatorModal',
-              defaultRoute: to
+              defaultRoute: to,
+              defaultRouteProps: options.props
             }
           })
         }, options).catch(err => console.log(`[Navigator] Failed to show modal: ${err}`))

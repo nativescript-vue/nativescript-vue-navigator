@@ -8,9 +8,13 @@ export default {
       type: String,
       default: '/',
     },
+    defaultRouteProps: {
+      type: Object,
+      required: false
+    },
   },
   render(h) {
-    this.slotContent = this.slotContent || h(this.defaultRouteComponent)
+    this.slotContent = this.slotContent || h(this.defaultRouteComponent, { props: this.defaultRouteProps })
     return h(
       'frame',
       {
